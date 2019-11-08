@@ -1,0 +1,66 @@
+= Choosing a hardware toolchain for a cloud connected sensor (microcontroller based)
+:includedir: _includes
+:imagesdir: ./images
+:shared-includedir: ../../shared/doc/_includes
+:icons: font
+:toc: left
+:nofooter:
+:source-highlighter: highlightjs
+:sectnums:
+// refs
+:r0: https://github.com/vittali/TiPs_5[compagnion repo]
+:r1: https://cloud.ibm.com[IBM Bluemix]
+:r2: http://www.ti.com/tool/TIDC-01002?jktype=design[SimpleLink™ Sub-1 GHz Sensor to Cloud Gateway Reference Design for TI-RTOS Systems]
+:r3: http://www.ti.com/lit/ug/tidud09a/tidud09a.pdf[TI Designs:TIDC-01002 Sub-1GHz Embedded Sensor to Cloud Industrial Internet of Things(IoT) Gateway Reference Design]
+:r4: http://dev.ti.com/tirex/explore/node?devtools=LAUNCHXL-CC1352P1&node=AOSQDVXMohlV5LElLx5wxA__pTTHBmu__LATEST[SimpleLink CC13x2 26x2 SDK (3.40.00.02)]
+
+[abstract]
+icon:home[link="https://vittali.ch"]
+
+I want to connect wireless sensor nodes to the IBM IoT Watson cloud infrastructure {r1} based on the TI Design {r2}.
+The reference document is {r3}. Related source code can be cloned from the {r0}. I use Linux Mint 19.2 Tina and Code Composer Studio 9.2.0 (CCS).
+
+The software architecture described in the TI Design is now part of the official {r4} documentation and I will follow the recommended learning path of the
+ _SimpleLink Academy (3.30.03.00)_. However the TI Design has more details and is still a useful resource for understanding the TI 15.4 example projects.
+ More importantly, part of the software - the gateway project - is not available in the SDK and must be cloned from a git repository hosted by TI.
+
+
+== Introduction
+
+The proposed architecture for connecting wireless sensors to the Internet is based on the following components:
+
+. one or more sensors
+. a collector that manages and interacts with sensors
+. a coprocessor that combines the collector function with a host communication interface
+. a gateway that relays data between an internet-based application like a webserver
+. a cloud service that allows for two way commmunication between an internet user and a set of sensors/actuators
+
+The reference document <<r31>>, called _TI Design_ in this memo, contains a detailed description of each component.
+
+So why this memo when there is a comprehensive document by TI ?
+
+The TI Design
+
+. tries to minimize the T.T.H.W ( https://www.youtube.com/watch?v=c9Xt6Me3mJ4&t=4104s[Time To Hello World]) by flashing prebuilt binaries
+. covers two alternative cloud services, Bluemix (IBM) and (AWS) Amazon, including details on how to create a cloud-enabled account
+. presents alternative apps for Android and iOS to configure the gateway part
+
+
+Whereas in this memo, I
+
+. proceed in small steps with verifiable results in order to gain at least a superficial understanding of each component
+. focus on IBM bluemix without going into details, which are the subject of a previous https://www.vittali.ch/2-nred-bluemix[memo]
+. do not mention any apps, since I could not get them to work as advertised (on Android)
+. compile everything from source, rather than using prebuilt binaries
+. adapt my host development environment to a workflow where several LaunchPads are connected to the host computer simultaneously
+. summarize a couple of speed bumpers which increased the T.T.H.W
+
+Again, the T.T.H.W. is still unknown because I am currently unable to build the gateway application from source <<e2e3>>.
+
+include::{includedir}/preparation.adoc[]
+include::{includedir}/sensor-collector.adoc[]
+include::{includedir}/coprocessor.adoc[]
+include::{includedir}/gateway.adoc[]
+include::{includedir}/ibmcloud.adoc[]
+include::{includedir}/refs.adoc[]
+include::{includedir}/15_4.adoc[]

@@ -1,0 +1,56 @@
+
+:r11: http://dev.ti.com/tirex/explore/node?devtools=LAUNCHXL-CC1352P1&node=AFU6dryAU8NukjdRPy4T4Q__pTTHBmu__LATEST[Sensor and Collector - TI 15.4-Stack Project Zero]
+:r12: http://www.ti.com/tool/LAUNCHXL-CC1352R1[SimpleLink™ Multi-Band CC1352R Wireless MCU LaunchPad™ Development Kit]
+
+== Sensor and Collector - TI 15.4-Stack Project Zero
+
+To familiarize myself with the sensor and collector hardware,
+I follow the lab exercise {r11}. I use _GTKTerm_ from the Mint/Ubuntu distribution.
+
+I use two {r12} LaunchPads:
+
+[[hardware, hardware setup]]
+.Two CC1352P1 launch pads programmed as Sub-1 Ghz sensor and collector
+image::sensor-collector-hardware.png[CC1352P1]
+
+=== Copy the example projects
+
+I import the following projects into the CCS workspace as described in the
+SimpleLink CC13x2 26x2 SDK (3.40.00.02) documentation of the <<r13>>
+
+. sensor_CC1352P1_LAUNCHXL_tirtos_ccs_syscfg
+. collector_CC1352P1_LAUNCHXL_tirtos_ccs_syscfg
+. coprocessor_CC1352P1_LAUNCHXL_tirtos_ccs_syscfg
+
+Within CCS, I then copy the projects into {r0}, with the following abbreviated names:
+
+. sensor
+. collector
+. coprocessor
+
+
+
+=== Task 1
+
+I can't set the Sub-1 Ghz Frequency to 868 Mhz as I expected,
+the only choice for the european band seems to be 863 Mhz. This might be related
+to the channel selection, I need to read <<r11>>.
+
+.Configure the TI 15.4 Stack Sub 1-Ghz Frequency
+image::sensor-syscfg.png[sensor.syscfg]
+
+
+=== Task 3
+
+I set the serial numbers of the sensor and collector to _1_ and _2_. Therefore, I can open terminal sessions on port `/dev/ti100` and `/dev/ti200`.
+
+As mentioned in step 6 of the lab exercise, I press and hold `Button 2` and then the `Reset` button (while Button 2 is held down) on either board, see <<hardware>>.
+
+.Collector (top) and sensor (bottom) terminal output after factory reset.
+image::terminals.png[terminal output after reset]
+
+
+After pressing `Button 2` again on the collector, the sensor is allowed to join and a network is created:
+
+.Collector (top) and sensor (bottom) terminal output after the sensor joined the network.
+image::sensor-has-joined.png[sensor has joined]

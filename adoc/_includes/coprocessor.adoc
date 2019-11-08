@@ -1,0 +1,23 @@
+:r21: https://processors.wiki.ti.com/images/c/c2/BoosterPack_Standard_PUBLIC_2PAGE.pdf[BoosterPack Standard Header Pin Assignment]
+== Coprocessor
+
+
+=== Copy the example project
+
+I import the project `coprocessor_CC1352P1_LAUNCHXL_tirtos_ccs_syscfg` into the CCS workspace.
+
+Within CCS, I then copy the project as `coprocessor-uart` into the {r0}.
+
+=== UART configuration
+
+According to the TI Design, I need to modifiy the UART configuration:
+
+[quote, 3.2.1.1.4.3 Compiling the Mac-CoP fromSource]
+____
+When re-compiling the Mac CoP firmware, the pin configuration for the UART needs to be modified since the default Mac CoP example
+in the CC13xxSDK uses IOID3 and IOID2 pins for UART and the gateway uses IOID11 and IOID9.
+____
+
+
+However, the CC1352P1 LaunchPad uses DIO12 and DIO13 corresponding to J4/J3 on the {r21}, just like the CC3220 LaunchPad for the gateway.
+No modification is required on either board, other than the Jumper adjustements explained in _3.2.1.1.5 Connecting the MAC-CoP and the CC3220SFLaunchPad™_.

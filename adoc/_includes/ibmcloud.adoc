@@ -1,0 +1,17 @@
+
+== IBM cloud demo software
+
+After a couple of modifications inside the `ibm_cloud_application` directory (see log of the git submodule), I am able to
+push the application to the IBM cloud:
+
+----
+$ cd vittali.ch-5-TIR-1002/tidc01002/examples/ibm_cloud_application
+$ ibmcloud login
+$ ibmclound target --cf
+$ ibmcloud push --cf
+----
+
+I am unable to open the network as explained in Figure 67 of the reference document <<e2e2>>.
+
+I suspect the reason is a communication problem between coprocessor and gateway or/and the coprocessor and the sensor. Clearly, the coprocessor
+must be configured to use the european 863 Mhz band, but it is not clear to me how this configuration can be performed.

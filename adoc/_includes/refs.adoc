@@ -1,0 +1,46 @@
+
+== References
+
+[bibliography]
+=== TI Design TIDC-01002
+
+- [[[r31]]] {r3}
+
+[bibliography]
+=== udev device event subsystem
+
+- [[[r41]]] https://unix.stackexchange.com/questions/66901/how-to-bind-usb-device-under-a-static-name[How to bind USB device under a static name?]
+- [[[r42]]] http://www.reactivated.net/writing_udev_rules.html#env[Writing udev rules]
+- [[[r43]]] https://txlab.wordpress.com/2016/06/14/udev-rules-for-ttyusb-devices[udev rules for ttyUSB devices]
+
+[bibliography]
+=== CC1352P1
+
+- [[[r12]]] {r4}
+- [[[r11]]] http://www.ti.com/lit/an/swra048/swra048.pdf[ISM-Band and Short Range Device Regulatory Compliance Overview]
+- [[[r13]]] {r12}
+
+[bibliography]
+=== CC3220SF
+
+- [[[r21]]] http://www.ti.com/lit/wp/swry011a/swry011a.pdf[A primer to Wi-Fi  ®provisioning for IoT applications]
+- [[[r22]]] http://software-dl.ti.com/ecs/SIMPLELINK_CC32XX_SDK/3_30_01_02/exports/docs/Documentation_Overview.html[Documentation Overview for SimpleLink™ CC32xx SDK]
+- [[[r23]]] http://software-dl.ti.com/targetcontent/watsoniot/1_20_00_04/exports/watson_cc32xx_1_20_00_04/docs/Documentation_Overview.html[Documentation Overview for CC32XX Watson IoT Plugin]
+
+=== TI E2E support forum
+
+[bibliography]
+==== dicussions started by me
+
+- [[[e2e1]]] https://e2e.ti.com/support/wireless-connectivity/sub-1-ghz/f/156/t/848811[Frequency and channel selection]
+* The exact frequency depends on the channel selection, see <<r11>>
+
+- [[[e2e2]]] https://e2e.ti.com/support/wireless-connectivity/sub-1-ghz/f/156/t/855309[TIDC-01002: Can't open network]
+* I am unable to configure the coprocessor for the desired frequency setting (863 MHz, long distance)
+
+- [[[e2e3]]] https://e2e.ti.com/support/wireless-connectivity/wifi/f/968/t/896918[CC3220SF-LAUNCHXL: TI Ref Design TIDC-01002, gateway example project for the CC3220SF LaunchPad, missing header files]
+* I am unable to compile the gateway project from source due to missing header files
+
+== discussions started by others
+
+- [[[e2e4]]] http://e2e.ti.com/support/tools/ccs/f/81/t/733445?CCS-CCSV6-1-3-compiler-6-4-12-TMS320F2812-Remote-system-Explorer-Operation-slowing-down-compiling-["Remote system Explorer Operation" slowing down compiling.]

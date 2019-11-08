@@ -1,0 +1,90 @@
+
+:r51: http://dev.ti.com/tirex/explore/node?devtools=CC3220SF-LAUNCHXL&node=AMbaIpevqf00fzNR.N96jg__fc2e6sr__LATEST[Meet the CC3220x LaunchPad Development Kit]
+:r52: http://www.ti.com/tool/CC3220SF-LAUNCHXL[SimpleLink™ Wi-Fi® CC3220SF wireless microcontroller LaunchPad™ development kit]
+:r53: http://www.ti.com/lit/ug/swru463b/swru463b.pdf[CC3220 SimpleLink™ Wi-Fi® LaunchPad™ DevelopmentKit Hardware]
+:r54: http://www.ti.com/lit/ug/swru461b/swru461b.pdf[CC3220 SimpleLink™ Wi-Fi® and Internet of Things Solution,a Single-Chip Wireless MCU Getting Started Guide]
+:r55: http://www.ti.com/lit/ug/swru455j/swru455j.pdf[CC3x20,CC3x35 SimpleLink™ Wi-Fi® and Internet of Things Network Processor Programmer's Guide]
+:r56: http://www.ti.com/lit/SWRU473[SimpleLink™ Wi-Fi®CC3220 Out-of-Box Application]
+
+== Gateway
+
+To familiarize myself with the gateway hardware {r52}, I follow the lab exercise {r51}.
+
+=== Task 1
+
+I could not complete this task with the LaunchPad as shipped.
+
+I first followed {r54} to flash the latest service pack and the MCU binary `network_terminal_CC3220SF_LAUNCHXL_tirtos_ccs`.
+
+[[network-terminal, network terminal demo]]
+.Terminal output for the network terminal demo.
+image::gateway-network-terminal-demo.png[network terminal demo]
+
+I then flashed the `out_of_box_CC3220SF_LAUNCHXL_tirtos_ccs` demo project as described.
+
+The default target configuration is correct (I set the serial number for the gateway LaunchPad to _3_):
+
+[[target-conf]]
+.Default target with the custom serial number
+image::CC3220SF-target-conf-default.png[target conf]
+
+While I was able to start a debug session for the `out_of_box_CC3220SF_LAUNCHXL_tirtos_ccs` project,
+the loaded program was not persisted to flash, rather the previsiouly flashed network terminal demo would run upon reset.
+Also, I did not get any terminal output, so there seems to be a difference between
+the binaries I flashed in Task 1 and the one I created with CCS.
+
+
+=== Task 6
+
+I was unable to provision the LaunchPad with the android app: the scan for devices to configure always times out.
+Instead, I created a profile from the website running on the LaunchPad.
+
+Upon reset, the board connects automatically to the AP `APSchuppen`:
+
+[[auto-connect-ap]]
+.Provisioning via internal webserver seems to be succesfull.
+image::sta-connect-to-AP.png[STA connects to AP]
+
+
+
+=== Recompiling from source
+
+I import the example projects
+
+ 15_4_Stack_Gtway_IBM_CC3220SF_LAUNCHXL_tirtos_ccs
+ tirtos_builds_CC3220SF_LAUNCHXL_release_ccs
+
+from
+
+ vittali.ch-5-TIR-1002/tidc01002/examples/cc3220sf_gateway_app
+
+where `vittali.ch-5-TIR-1002` is the {r0} and `tidc01002` the source code repo of the TI Design (used as a git submodule).
+I then copied these projects to
+
+ gateway
+ gateway-base
+
+in the companion repo.
+
+The project won't compile because of issues with virtual folders and paths.
+Also, the following header files are missing <<e2e3>>:
+
+.Missing header files for the gateway project
+[cols="<3,<4,<3"]
+|===
+|missing file in TI Design | replacement | comment
+
+|ti/drivers/i2s/I2SCC32XXDMA.h | I2CC32XX.h | renamed
+
+|ti/drivers/net/wifi/bsd/sys/socket.h | ti/net/bsd/sys/socket.h |
+
+|ti/drivers/SDSPI.h | - | no longer supported, can be removed
+
+|wolfssl/ssl.h | wolfssl/ssl.h |  seperate https://github.com/wolfSSL/wolfssl/releases[installation]
+
+|===
+
+
+In turns out that this is just the tip of the iceberg, a lot of changes are required to get the project to compile.
+Unfortunately, I still get plenty of linking errors and I am not able to build the project.
+The companion repo contains the current unfinished state of the project.
