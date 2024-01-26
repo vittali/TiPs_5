@@ -1,1 +1,1 @@
-https://www.vittali.ch/TiPs_5/
+https://www.vittali.ch/#_tips_5/
